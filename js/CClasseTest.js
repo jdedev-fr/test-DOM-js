@@ -44,7 +44,7 @@ class voiture {
         monElem.style.left = this.posX + "px";
         monElem.style.width = "150px";
         monElem.style.height = "150px";
-        monElem.style.backgroundImage = "url(../img/" + this.image + ")";
+        monElem.style.backgroundImage = "url(./img/" + this.image + ")";
         monElem.style.backgroundRepeat = "no-repeat";
         monElem.style.backgroundSize = "contain";
 
