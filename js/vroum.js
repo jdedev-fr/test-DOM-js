@@ -87,8 +87,15 @@ function sauvContexte() {
 
 window.onload = () => {
     tmpTabPost = readCookie("svTabDingo")
-    //  tmpTabPost = (document.cookie.replace(/(?:(?:^|.*;s*)svTabDingo*=s*([^;]*).*$)|^.*$/, '$1'));
-    alert("Voici le contenu de mon cookie : \n" + tmpTabPost + "\n ou \n " + eval(tmpTabPost))
+    tmpTabPost = eval(tmpTabPost)
+    // alert("Voici le contenu de mon cookie : \n" + tmpTabPost + "\n ou \n " + eval(tmpTabPost))
+    for (unPost in tmpTabPost) {
+        //console.log(tmpTabPost[unPost])
+        let voit = new voiture(tabDingo.length + 1, tmpTabPost[unPost].image, tmpTabPost[unPost].x, tmpTabPost[unPost].y, tmpTabPost[unPost].vitesse)
+        tabDingo.push(voit);
+        //onBouge = true;
+        tabDingo[(tabDingo.length - 1)].afficheTest();
+    }
 
     refresh();
 }
