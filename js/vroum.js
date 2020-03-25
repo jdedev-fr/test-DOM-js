@@ -26,6 +26,8 @@ document.getElementById('dingPlus').addEventListener('mousedown', () => {
 
 });
 function refresh() {
+
+    logMe("Sérialisation du contexte : " + tabDingo.toString(), true)
     if (onBouge && idBouge != 0) {
         console.log("on déplace !")
         tabDingo[(idBouge - 1)].changePlace(x, y);
@@ -56,4 +58,17 @@ function jdeAttachElem(parentId, elem, classElem = [], idElem = "", fonct = "") 
 
 function delVoit(numVoit) {
     delete tabDingo[numVoit - 1]
+}
+
+/**
+ * Fonction permettant de logger du texte dans un element HTML avec id logMe
+ * 
+ * @param {string} texte - Texte à logger
+ * @param {boolean} vide - Reinit boite de log
+ */
+function logMe(texte, vide = false) {
+    if (document.getElementById("logMe") != null) {
+        if (vide) document.getElementById("logMe").innerHTML = "";
+        document.getElementById("logMe").innerHTML += '<br>' + texte
+    }
 }
