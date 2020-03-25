@@ -21,7 +21,7 @@ class voiture {
     * Affichage textuel du postIt - Sérialisation du postIt
     */
     toString() {
-        return '{"x":' + this.posX + ',"y":' + this.posY + ',"image":"' + this.image + '","vitesse":' + this.vitesse + '"}'
+        return '{"x":' + this.posX + ',"y":' + this.posY + ',"image":"' + this.image + '","vitesse":' + this.vitesse + '}'
     }
 
     changePlace(x, y) {

@@ -27,7 +27,8 @@ document.getElementById('dingPlus').addEventListener('mousedown', () => {
 });
 function refresh() {
 
-    logMe("Sérialisation du contexte : " + tabDingo.toString(), true)
+    //  logMe("Sérialisation du contexte : " + tabDingo.toString(), true)
+    sauvContexte();
     if (onBouge && idBouge != 0) {
         console.log("on déplace !")
         tabDingo[(idBouge - 1)].changePlace(x, y);
@@ -36,7 +37,7 @@ function refresh() {
     setTimeout(refresh, 300)
 }
 
-refresh();
+
 
 function jdeAttachElem(parentId, elem, classElem = [], idElem = "", fonct = "") {
     let elemACreer = document.createElement(elem)
@@ -71,4 +72,48 @@ function logMe(texte, vide = false) {
         if (vide) document.getElementById("logMe").innerHTML = "";
         document.getElementById("logMe").innerHTML += '<br>' + texte
     }
+}
+
+function sauvContexte() {
+    createCookie("svTabDingo", "[" + tabDingo.toString() + "]")
+    //  let myCookie = "svTabDingo=[" + tabDingo.toString() + "]";
+    //On crée un délai d'expiration d'une semaine pour le cookie.
+    //   let date = new Date();
+    //   date.setTime(date.getTime() + (30 * 7 * 24 * 60 * 60 * 1000)); /* La date est en millisecondes */
+    //   myCookie += "; expires=" + date.toGMTString(); /* Les dates des cookies doivent être au format GMT */
+    //   logMe(myCookie, true);
+    //  document.cookie = myCookie; /* Ajout du cookie */
+}
+
+window.onload = () => {
+    tmpTabPost = readCookie("svTabDingo")
+    //  tmpTabPost = (document.cookie.replace(/(?:(?:^|.*;s*)svTabDingo*=s*([^;]*).*$)|^.*$/, '$1'));
+    alert("Voici le contenu de mon cookie : \n" + tmpTabPost + "\n ou \n " + eval(tmpTabPost))
+
+    refresh();
+}
+
+function createCookie(name, value, days) {
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        var expires = "; expires=" + date.toGMTString();
+    }
+    else var expires = "";
+    document.cookie = name + "=" + value + expires + "; path=/";
+}
+
+function readCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+    }
+    return null;
+}
+
+function eraseCookie(name) {
+    createCookie(name, "", -1);
 }
